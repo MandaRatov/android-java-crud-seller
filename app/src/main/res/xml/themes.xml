@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base.Theme.Seller = thème de base généré par Android Studio à la création du projet.
+         On le garde tel quel s'il existe déjà, et on définit NOTRE thème par-dessus,
+         en héritant de MaterialComponents pour avoir accès aux composants Material
+         (FloatingActionButton, CardView, etc.) utilisés dans le layout. -->
+    <style name="Theme.Seller" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Couleur principale de l'app : utilisée par défaut sur certains
+             composants Material (boutons, FAB...) si tu ne la précises pas ailleurs -->
+        <item name="colorPrimary">#6200EE</item>
+        <item name="colorPrimaryVariant">#3700B3</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+
+
+
+        <!-- Évite un espace vide résiduel là où la barre de statut était affichée -->
+        <item name="android:windowContentOverlap" tools:ignore="NewApi">false</item>
+
+        <!-- Optionnel : couleur de la barre de statut si jamais elle réapparaît
+             temporairement (swipe depuis le bord) -->
+        <item name="android:statusBarColor">#6200EE</item>
+    </style>
+
+</resources>

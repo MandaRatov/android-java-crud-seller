@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Seller</string>
+    <string-array name="sort_options">
+        <item>Nom : A → Z</item>
+        <item>Nom : Z → A</item>
+        <item>Plus récent</item>
+        <item>Plus ancien</item>
+    </string-array>
+</resources>
