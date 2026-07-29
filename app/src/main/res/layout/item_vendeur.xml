@@ -1,60 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="3dp">
+    android:layout_marginBottom="8dp"
+    android:gravity="center_vertical"
+    android:padding="10dp"
+    android:background="@drawable/bg_item_border">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:gravity="center_vertical">
+    <androidx.cardview.widget.CardView
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#EEEDFE">
 
-        <!-- id doit être EXACTEMENT "imgPhoto" (respecte la casse) -->
         <ImageView
             android:id="@+id/imgPhoto"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="12dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="12dp">
 
-            <TextView
-                android:id="@+id/txtNom"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/txtDatenais"
-                android:textSize="13sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/btnEdit"
+        <TextView
+            android:id="@+id/txtNom"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            android:textColor="#1C1C1E"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_menu_edit" />
+            android:layout_height="wrap_content" />
 
-        <ImageButton
-            android:id="@+id/btnDelete"
+        <TextView
+            android:id="@+id/txtDatenais"
+            android:textSize="12sp"
+            android:textColor="#8E8E93"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_menu_delete" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@android:drawable/ic_media_play"
+        android:alpha="0.35" />
+
+</LinearLayout>

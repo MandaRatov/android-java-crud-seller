@@ -4,43 +4,51 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="#FFFFFF"
+    android:fitsSystemWindows="true">
 
-    <!-- Toolbar = remplace l'ancienne ActionBar système, mais dessinée
-         par NOUS dans le layout, donc personnalisable (couleur, titre...) -->
+    <!-- Toolbar blanche, cohérente avec le header de la liste :
+         plus de violet plein, juste une ligne fine en dessous -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarDetail"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#5700EE"
-        app:titleTextColor="@android:color/white"
-        app:navigationIconTint="@android:color/white"
+        android:background="@android:color/white"
+        app:titleTextColor="#1C1C1E"
+        app:navigationIconTint="#1C1C1E"
         app:toolbarNavigationButtonStyle="@style/MyToolbarNavigationButtonStyle"
         app:title="Détail du vendeur" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <!-- Ligne fine de séparation, même technique que sur MainActivity -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#E0E0E0" />
+
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center_horizontal"
-        android:background="#F5F5F5"
+        android:background="#FFFFFF"
         android:padding="24dp">
 
-        <!-- Photo en grand, centrée, coins arrondis via un CardView -->
+        <!-- Photo : fond violet pâle par défaut, cohérent avec les avatars
+             de la liste, pas d'ombre marquée -->
         <androidx.cardview.widget.CardView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="24dp"
-            app:cardCornerRadius="90dp"
-            app:cardElevation="4dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="32dp"
+            app:cardCornerRadius="70dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#EEEDFE">
 
             <ImageView
                 android:id="@+id/imgDetailPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_foreground" />
+                android:scaleType="centerCrop" />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -48,45 +56,70 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:textColor="#1C1C1E" />
 
         <TextView
             android:id="@+id/txtDetailDatenais"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:textColor="#666666" />
+            android:layout_marginTop="6dp"
+            android:textSize="14sp"
+            android:textColor="#8E8E93" />
 
-        <!-- Espace flexible qui pousse les boutons vers le bas de l'écran -->
+        <!-- Espace flexible qui pousse les boutons vers le bas -->
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+        <!-- Boutons à bordure fine plutôt que fond plein, cohérent
+             avec le style minimaliste (seul un accent limité reste coloré) -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnModifier"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="6dp"
-                android:text="Modifier" />
+                android:text="Modifier"
+                android:textColor="#1C1C1E"
+                android:textSize="14sp"
+                app:icon="@android:drawable/ic_menu_edit"
+                app:iconTint="#1C1C1E"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:cornerRadius="12dp"
+                app:strokeColor="#E0E0E0"
+                app:strokeWidth="1dp"
+                android:backgroundTint="@android:color/white"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSupprimer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="6dp"
                 android:text="Supprimer"
-                android:backgroundTint="#D32F2F" />
+                android:textColor="#D32F2F"
+                android:textSize="14sp"
+                app:icon="@android:drawable/ic_menu_delete"
+                app:iconTint="#D32F2F"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:cornerRadius="12dp"
+                app:strokeColor="#D32F2F"
+                app:strokeWidth="1dp"
+                android:backgroundTint="@android:color/white"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
         </LinearLayout>
 
     </LinearLayout>
+
 </LinearLayout>

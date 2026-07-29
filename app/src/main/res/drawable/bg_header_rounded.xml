@@ -4,7 +4,7 @@
     android:shape="rectangle">
 
     <!-- La couleur de remplissage -->
-    <solid android:color="#59585B" />
+    <solid android:color="#9C2E2E2E" />
 
     <!-- corners définit les rayons d'arrondi.-->
 <!--    <corners-->

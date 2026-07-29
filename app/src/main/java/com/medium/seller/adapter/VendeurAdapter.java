@@ -11,15 +11,13 @@ import java.util.List;
 public class VendeurAdapter extends RecyclerView.Adapter<VendeurAdapter.VendeurViewHolder> {
 
     private List<Vendeur> vendeurList = new ArrayList<>();
-    private final OnItemActionListener listener;
+    private final OnItemClickListener listener;
 
-    public interface OnItemActionListener {
-        void onEdit(Vendeur vendeur);
-        void onDelete(Vendeur vendeur);
+    public interface OnItemClickListener {
         void onView(Vendeur vendeur);
     }
 
-    public VendeurAdapter(OnItemActionListener listener) {
+    public VendeurAdapter(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -41,36 +39,26 @@ public class VendeurAdapter extends RecyclerView.Adapter<VendeurAdapter.VendeurV
         Vendeur v = vendeurList.get(position);
         holder.txtNom.setText(v.getNom());
         holder.txtDatenais.setText(v.getDatenais());
-        // Charger la photo (URI) si présente, sinon garder l'image par défaut
+
         if (v.getPhoto() != null && !v.getPhoto().isEmpty()) {
             holder.imgPhoto.setImageURI(android.net.Uri.parse(v.getPhoto()));
         }
 
-        // itemView = la racine du layout item_vendeur.xml (le CardView entier).
-        // On met CE listener en dernier, et les listeners des boutons AVANT/APRÈS
-        // n'entrent pas en conflit : Android gère la vue la plus "profonde" cliquée
-        // en priorité (bouton), sinon ça remonte au conteneur (carte entière).
         holder.itemView.setOnClickListener(view -> listener.onView(v));
-
-        holder.btnEdit.setOnClickListener(view -> listener.onEdit(v));
-        holder.btnDelete.setOnClickListener(view -> listener.onDelete(v));
     }
 
     @Override
     public int getItemCount() { return vendeurList.size(); }
 
-    static class VendeurViewHolder extends RecyclerView.ViewHolder {
+    public static class VendeurViewHolder extends RecyclerView.ViewHolder {
         android.widget.ImageView imgPhoto;
         android.widget.TextView txtNom, txtDatenais;
-        android.widget.ImageButton btnEdit, btnDelete;
 
         VendeurViewHolder(View itemView) {
             super(itemView);
             imgPhoto = itemView.findViewById(R.id.imgPhoto);
             txtNom = itemView.findViewById(R.id.txtNom);
             txtDatenais = itemView.findViewById(R.id.txtDatenais);
-            btnEdit = itemView.findViewById(R.id.btnEdit);
-            btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 }

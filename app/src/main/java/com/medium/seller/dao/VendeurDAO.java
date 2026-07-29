@@ -33,4 +33,5 @@ public interface VendeurDAO {
     @Query("Select * from vendeur where nom like '%' || :keyword || '%' order by nom asc")
     LiveData<List<Vendeur>> searchByNom(String keyword);
 
+
 }

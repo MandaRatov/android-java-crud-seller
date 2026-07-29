@@ -36,7 +36,7 @@ public class DetailVendeurActivity extends AppCompatActivity {
 
         // Force la couleur blanche de la flèche
         if (toolbar.getNavigationIcon() != null) {
-            toolbar.getNavigationIcon().setTint(android.graphics.Color.WHITE);
+            toolbar.getNavigationIcon().setTint(android.graphics.Color.parseColor("#1C1C1E"));
         }
         // ====== FIN Toolbar ======
 

@@ -56,13 +56,13 @@ public class AddEditVendeurActivity extends AppCompatActivity {
             );
         }
         if (toolbar.getNavigationIcon() != null) {
-            toolbar.getNavigationIcon().setTint(android.graphics.Color.WHITE);
+            toolbar.getNavigationIcon().setTint(android.graphics.Color.parseColor("#1C1C1E"));
         }
 
         edtNom = findViewById(R.id.edtNom);
         edtDatenais = findViewById(R.id.edtDatenais);
         imgPhoto = findViewById(R.id.imgPhotoPreview);
-        Button btnChoosePhoto = findViewById(R.id.btnChoosePhoto);
+        TextView btnChoosePhoto = findViewById(R.id.btnChoosePhoto);
         Button btnSave = findViewById(R.id.btnSave);
 
         viewModel = new ViewModelProvider(this).get(VendeurViewModel.class);
