@@ -1,108 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:fitsSystemWindows="true">
+    android:background="@color/gray_light"
+    android:fitsSystemWindows="false">
 
-    <!-- Toolbar blanche, cohérente avec les autres écrans -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarAddEdit"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white"
-        app:titleTextColor="#1C1C1E"
-        app:navigationIconTint="#1C1C1E"
-        app:toolbarNavigationButtonStyle="@style/MyToolbarNavigationButtonStyle"
-        app:title="Ajouter / Modifier" />
+        android:layout_height="wrap_content"
+        android:background="@color/blue_primary">
 
-    <!-- Ligne fine de séparation, même technique que sur les autres écrans -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#E0E0E0" />
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="24dp">
-
-        <!-- Photo : avatar rond avec fond violet pâle, cohérent avec
-             le détail et la liste, pas d'ombre -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            app:cardCornerRadius="60dp"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="#EEEDFE">
-
-            <ImageView
-                android:id="@+id/imgPhotoPreview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
-        </androidx.cardview.widget.CardView>
-
-        <!-- Bouton photo : texte seul, discret, pas de bouton plein -->
-        <TextView
-            android:id="@+id/btnChoosePhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="12dp"
-            android:text="Changer la photo"
-            android:textColor="#004FEE"
-            android:textSize="14sp"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackground"
-            android:padding="8dp" />
-
-        <!-- Champs texte : fond gris clair plat, sans cadre, cohérent
-             avec la barre de recherche de la liste -->
-        <EditText
-            android:id="@+id/edtNom"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarAddEdit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:layout_marginTop="24dp"
-            android:hint="Nom du vendeur"
-            android:textSize="15sp"
-            android:textColorHint="#8E8E93"
-            android:background="#F2F2F2"
-            android:padding="14dp" />
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:title="Ajouter un vendeur"
+            app:titleTextColor="@color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <EditText
-            android:id="@+id/edtDatenais"
-            android:focusable="false"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Date de naissance"
-            android:textSize="15sp"
-            android:textColorHint="#8E8E93"
-            android:background="#F2F2F2"
-            android:padding="14dp" />
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-        <!-- Espace flexible qui pousse le bouton Enregistrer vers le bas -->
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            <!-- Section Photo -->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp">
 
-        <!-- Seul bouton plein/coloré de l'écran : l'action principale -->
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Enregistrer"
-            android:textColor="@android:color/white"
-            android:backgroundTint="#2F2F2F" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgPhotoPreview"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:background="@color/white"
+                    android:padding="2dp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+                    app:strokeColor="@color/blue_primary"
+                    app:strokeWidth="2dp"
+                    tools:src="@android:drawable/ic_menu_gallery" />
 
-    </LinearLayout>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnChoosePhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="4dp"
+                    android:src="@android:drawable/ic_menu_camera"
+                    app:backgroundTint="@color/blue_primary"
+                    app:fabSize="mini"
+                    app:tint="@color/white" />
+            </FrameLayout>
 
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="Photo du vendeur"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+
+            <!-- Formulaire -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nom complet"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:startIconDrawable="@android:drawable/ic_menu_edit">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtNom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:textColor="@color/text_dark" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Date de naissance"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:startIconDrawable="@android:drawable/ic_menu_my_calendar">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtDatenais"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:inputType="none"
+                            android:textColor="@color/text_dark" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="24dp"
+                android:text="Enregistrer le vendeur"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp"
+                app:elevation="4dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

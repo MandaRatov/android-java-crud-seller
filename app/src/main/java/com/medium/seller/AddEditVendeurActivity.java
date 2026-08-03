@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 import com.medium.seller.model.Vendeur;
+import com.medium.seller.utils.DateUtils;
 import com.medium.seller.viewmodel.VendeurViewModel;
 
 import java.io.File;
@@ -56,14 +57,14 @@ public class AddEditVendeurActivity extends AppCompatActivity {
             );
         }
         if (toolbar.getNavigationIcon() != null) {
-            toolbar.getNavigationIcon().setTint(android.graphics.Color.parseColor("#1C1C1E"));
+            toolbar.getNavigationIcon().setTint(android.graphics.Color.WHITE);
         }
 
         edtNom = findViewById(R.id.edtNom);
         edtDatenais = findViewById(R.id.edtDatenais);
         imgPhoto = findViewById(R.id.imgPhotoPreview);
-        TextView btnChoosePhoto = findViewById(R.id.btnChoosePhoto);
-        Button btnSave = findViewById(R.id.btnSave);
+        android.view.View btnChoosePhoto = findViewById(R.id.btnChoosePhoto);
+        android.view.View btnSave = findViewById(R.id.btnSave);
 
         viewModel = new ViewModelProvider(this).get(VendeurViewModel.class);
 
@@ -198,6 +199,22 @@ public class AddEditVendeurActivity extends AppCompatActivity {
 
         if (nom.isEmpty()) {
             edtNom.setError("Le nom est obligatoire");
+            return;
+        }
+        
+        if (nom.length() > 100) {
+            edtNom.setError("Le nom ne peut pas dépasser 100 caractères");
+            return;
+        }
+
+        if (datenais.isEmpty()) {
+            Toast.makeText(this, "La date de naissance est obligatoire", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int age = DateUtils.calculateAge(datenais);
+        if (age < 16) {
+            Toast.makeText(this, "Le vendeur doit avoir au moins 16 ans", Toast.LENGTH_SHORT).show();
             return;
         }
 

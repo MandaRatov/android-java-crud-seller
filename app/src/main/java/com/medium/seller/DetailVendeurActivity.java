@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 import com.medium.seller.model.Vendeur;
+import com.medium.seller.utils.DateUtils;
 import com.medium.seller.viewmodel.VendeurViewModel;
 
 public class DetailVendeurActivity extends AppCompatActivity {
@@ -36,15 +37,15 @@ public class DetailVendeurActivity extends AppCompatActivity {
 
         // Force la couleur blanche de la flèche
         if (toolbar.getNavigationIcon() != null) {
-            toolbar.getNavigationIcon().setTint(android.graphics.Color.parseColor("#1C1C1E"));
+            toolbar.getNavigationIcon().setTint(android.graphics.Color.WHITE);
         }
         // ====== FIN Toolbar ======
 
         ImageView imgPhoto = findViewById(R.id.imgDetailPhoto);
         TextView txtNom = findViewById(R.id.txtDetailNom);
         TextView txtDatenais = findViewById(R.id.txtDetailDatenais);
-        Button btnModifier = findViewById(R.id.btnModifier);
-        Button btnSupprimer = findViewById(R.id.btnSupprimer);
+        android.view.View btnModifier = findViewById(R.id.btnModifier);
+        android.view.View btnSupprimer = findViewById(R.id.btnSupprimer);
 
         Intent i = getIntent();
         idvend = i.getIntExtra("idvend", -1);
@@ -53,7 +54,10 @@ public class DetailVendeurActivity extends AppCompatActivity {
         photo = i.getStringExtra("photo");
 
         txtNom.setText(nom);
-        txtDatenais.setText(datenais);
+        
+        int age = DateUtils.calculateAge(datenais);
+        txtDatenais.setText(datenais + " (" + age + " ans)");
+
         if (photo != null && !photo.isEmpty()) {
             imgPhoto.setImageURI(Uri.parse(photo));
         }

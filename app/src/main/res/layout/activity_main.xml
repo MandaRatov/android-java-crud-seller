@@ -1,119 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:fitsSystemWindows="true">
+    android:background="@color/gray_light"
+    android:fitsSystemWindows="false">
 
-    <!-- ============================================================
-         HEADER : fond blanc uni, séparé du reste par une simple ligne
-         ============================================================ -->
-    <LinearLayout
-        android:orientation="vertical"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:paddingTop="16dp"
-        android:paddingBottom="14dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:text="Gestion des vendeurs"
-            android:textColor="#1C1C1E"
-            android:textSize="20sp"
-            android:textStyle="normal" />
-
-        <LinearLayout
-            android:orientation="horizontal"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:background="#F2F2F2"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp">
+                android:paddingBottom="32dp">
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@android:drawable/ic_menu_search"
-                    android:alpha="0.5" />
+                <!-- Fond dégradé principal -->
+                <View
+                    android:id="@+id/headerBackground"
+                    android:layout_width="0dp"
+                    android:layout_height="260dp"
+                    android:background="@drawable/bg_header_gradient"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/edtSearch"
+                <!-- Logo stylisé -->
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgHeaderLogo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="60dp"
+                    android:background="@color/white"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_launcher_foreground"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium" />
+
+                <TextView
+                    android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:hint="Rechercher un vendeur..."
-                    android:textSize="13sp"
-                    android:textColorHint="#8E8E93"
-                    android:background="@android:color/transparent"
-                    android:singleLine="true"
-                    android:imeOptions="actionSearch" />
-            </LinearLayout>
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Seller Manager"
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgHeaderLogo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgHeaderLogo"
+                    app:layout_constraintTop_toTopOf="@+id/imgHeaderLogo" />
 
-            <FrameLayout
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="8dp"
-                android:background="#F2F2F2">
+                <TextView
+                    android:id="@+id/subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Statistiques globales"
+                    android:textColor="#CCFFFFFF"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/imgHeaderLogo"
+                    app:layout_constraintTop_toBottomOf="@+id/imgHeaderLogo" />
 
-                <ImageButton
-                    android:id="@+id/btnSort"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:src="@android:drawable/ic_menu_sort_alphabetically"
-                    android:contentDescription="Trier la liste" />
-            </FrameLayout>
-        </LinearLayout>
-    </LinearLayout>
+                <!-- Badge de comptage plus pro -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/countCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:cardBackgroundColor="#33FFFFFF"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintStart_toStartOf="@+id/subtitle"
+                    app:layout_constraintTop_toBottomOf="@+id/subtitle"
+                    app:strokeColor="#4DFFFFFF"
+                    app:strokeWidth="1dp">
 
-    <!-- Ligne fine de séparation -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#E0E0E0" />
-    <!-- ====== FIN header ====== -->
+                    <TextView
+                        android:id="@+id/txtCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="6dp"
+                        android:text="Chargement..."
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </com.google.android.material.card.MaterialCardView>
 
+                <!-- Barre de recherche centrée sur la limite du header -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/searchCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/headerBackground"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/headerBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="4dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@android:drawable/ic_menu_search"
+                            app:tint="@color/blue_primary" />
+
+                        <EditText
+                            android:id="@+id/edtSearch"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:hint="Rechercher un vendeur..."
+                            android:imeOptions="actionSearch"
+                            android:singleLine="true"
+                            android:textColor="@color/text_dark"
+                            android:textColorHint="@color/text_secondary"
+                            android:textSize="15sp" />
+
+                        <ImageButton
+                            android:id="@+id/btnSort"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="Trier"
+                            android:src="@android:drawable/ic_menu_more"
+                            app:tint="@color/blue_primary" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:paddingHorizontal="12dp"
-        android:paddingTop="10dp"
-        android:clipToPadding="false" />
+        android:paddingTop="12dp"
+        android:paddingBottom="88dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/item_vendeur" />
 
-    <!-- FAB blanc, moderne, discret : icône sombre sur fond blanc,
-         ombre légère plutôt que couleur vive -->
+    <!-- FAB -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_gravity="end"
-        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
         android:src="@android:drawable/ic_input_add"
-        app:tint="#1C1C1E"
-        app:backgroundTint="@android:color/white"
-        app:borderWidth="0dp"
-        app:elevation="3dp"
-        app:fabCustomSize="56dp"
-        app:maxImageSize="22dp" />
+        app:backgroundTint="@color/blue_primary"
+        app:elevation="8dp"
+        app:fabSize="normal"
+        app:tint="@color/white" />
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

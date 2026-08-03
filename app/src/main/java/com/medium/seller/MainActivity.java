@@ -27,11 +27,32 @@ public class MainActivity extends AppCompatActivity implements VendeurAdapter.On
         adapter = new VendeurAdapter(this);
         recyclerView.setAdapter(adapter);
 
+        android.widget.TextView txtCount = findViewById(R.id.txtCount);
+
         viewModel = new ViewModelProvider(this).get(VendeurViewModel.class);
-        viewModel.getAllVendeurs().observe(this, adapter::setVendeurList);
+        viewModel.getAllVendeurs().observe(this, vendeurs -> {
+            adapter.setVendeurList(vendeurs);
+            int count = vendeurs.size();
+            txtCount.setText("Nombre de vendeurs enregistrés : " + count);
+        });
 
         findViewById(R.id.btnAdd).setOnClickListener(v ->
                 startActivityForResult(new Intent(this, AddEditVendeurActivity.class), REQUEST_ADD));
+
+        findViewById(R.id.btnSort).setOnClickListener(v -> {
+            androidx.appcompat.widget.PopupMenu popup = new androidx.appcompat.widget.PopupMenu(this, v);
+            popup.getMenu().add("Trier par nom");
+            popup.getMenu().add("Trier par âge");
+            popup.setOnMenuItemClickListener(item -> {
+                if (item.getTitle().equals("Trier par nom")) {
+                    adapter.sortByNom();
+                } else {
+                    adapter.sortByAge();
+                }
+                return true;
+            });
+            popup.show();
+        });
 
         EditText edtSearch = findViewById(R.id.edtSearch);
         edtSearch.addTextChangedListener(new android.text.TextWatcher() {
